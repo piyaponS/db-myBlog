@@ -6,14 +6,15 @@ const port = process.env.PORT || 8000;
 const user = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
 const users = require("./routes/userRoute");
-const currentUser = require("./routes/currentUserRoute");
-const profileUsername = require("./routes/profileUsername");
 const articles = require("./routes/articleRoute");
+const cors = require("cors");
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use("/api/users", users);
-app.use("/api/user", currentUser);
-app.use("/api/profiles", profileUsername);
+app.use("/api", users);
 app.use("/api/articles", articles);
 mongoose
   .connect(

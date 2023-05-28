@@ -7,6 +7,7 @@ const articleSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
+
     title: {
       type: String,
       required: true,
@@ -19,19 +20,68 @@ const articleSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    taglist: [String],
-    author: {
+    taglist: {
+      type: Array,
+      default: [],
+    },
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "UserProfile",
-      select: false,
+      ref: "User",
+    },
+
+    name: {
+      type: String,
+    },
+    faceColor: {
+      type: String,
+    },
+    hairStyle: {
+      type: String,
+    },
+    hatStyle: {
+      type: String,
+    },
+    glassesStyle: {
+      type: String,
+    },
+    eyeBrowStyle: {
+      type: String,
+    },
+    eyeStyle: {
+      type: String,
+    },
+    earSize: {
+      type: String,
+    },
+    noseStyle: {
+      type: String,
+    },
+    mouthStyle: {
+      type: String,
+    },
+    shirtStyle: {
+      type: String,
+    },
+    hairColor: {
+      type: String,
+    },
+    shirtColor: {
+      type: String,
+    },
+    bgColor: {
+      type: String,
     },
     favorited: {
-      type: Boolean,
-      default: false,
-    },
-    favoritesCount: {
       type: Number,
       default: 0,
+    },
+    favoritesCount: {
+      type: Array,
+      default: [],
+    },
+    comment: {
+      type: Array,
+      default: [],
     },
     articlesCount: {
       type: Number,

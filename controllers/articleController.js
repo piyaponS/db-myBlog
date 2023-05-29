@@ -149,9 +149,26 @@ const updateArticle = async (req, res) => {
 
 const postCommentArticle = async (req, res) => {
   const { slug } = req.params;
-
   try {
     const { comment } = req.body;
+    const {
+      _id,
+      name,
+      faceColor,
+      hairStyle,
+      hatStyle,
+      glassesStyle,
+      eyeBrowStyle,
+      eyeStyle,
+      earSize,
+      noseStyle,
+      mouthStyle,
+      shirtStyle,
+      hairColor,
+      shirtColor,
+      bgColor,
+    } = req.user;
+    console.log(_id, name);
     const postComment = await Article.findOneAndUpdate(
       { slug },
       {
@@ -160,7 +177,24 @@ const postCommentArticle = async (req, res) => {
       { new: true }
     );
     if (postComment) {
-      res.status(200).json({ comment });
+      res.status(200).json({
+        comment,
+        _id,
+        name,
+        faceColor,
+        hairStyle,
+        hatStyle,
+        glassesStyle,
+        eyeBrowStyle,
+        eyeStyle,
+        earSize,
+        noseStyle,
+        mouthStyle,
+        shirtStyle,
+        hairColor,
+        shirtColor,
+        bgColor,
+      });
     }
   } catch (err) {
     return res.status(500).json({
@@ -171,9 +205,45 @@ const postCommentArticle = async (req, res) => {
 
 const getCommentArticle = async (req, res) => {
   const { slug } = req.params;
+  const {
+    _id,
+    name,
+    faceColor,
+    hairStyle,
+    hatStyle,
+    glassesStyle,
+    eyeBrowStyle,
+    eyeStyle,
+    earSize,
+    noseStyle,
+    mouthStyle,
+    shirtStyle,
+    hairColor,
+    shirtColor,
+    bgColor,
+  } = req.user;
   try {
     const article = await Article.findOne({ slug });
-    res.status(200).json(article.comment);
+    res
+      .status(200)
+      .json(
+        article.comment,
+        _id,
+        name,
+        faceColor,
+        hairStyle,
+        hatStyle,
+        glassesStyle,
+        eyeBrowStyle,
+        eyeStyle,
+        earSize,
+        noseStyle,
+        mouthStyle,
+        shirtStyle,
+        hairColor,
+        shirtColor,
+        bgColor
+      );
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch comments." });
   }
